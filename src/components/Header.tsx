@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export const Header = () => {
   const { logout } = useAuth();
@@ -8,17 +8,28 @@ export const Header = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/login'); // Redirect user to login page after logout
+    navigate('/login'); // Redirect to login after logout
   };
 
   return (
-    <header style={{
-      padding: '1rem',
-      backgroundColor: '#f0f0f0',
-      display: 'flex',
-      justifyContent: 'flex-end',
-      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
-    }}>
+    <header
+      style={{
+        padding: '1rem',
+        backgroundColor: '#f0f0f0',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+      }}
+    >
+      <nav>
+        <Link to="/" style={{ marginRight: '1rem', textDecoration: 'none', color: '#333' }}>
+          Home
+        </Link>
+        <Link to="/analyze" style={{ marginRight: '1rem', textDecoration: 'none', color: '#333' }}>
+          Analyze
+        </Link>
+      </nav>
       <button
         onClick={handleLogout}
         style={{
@@ -27,7 +38,7 @@ export const Header = () => {
           color: 'white',
           border: 'none',
           borderRadius: '4px',
-          cursor: 'pointer'
+          cursor: 'pointer',
         }}
       >
         Logout
@@ -35,5 +46,3 @@ export const Header = () => {
     </header>
   );
 };
-
-export {};

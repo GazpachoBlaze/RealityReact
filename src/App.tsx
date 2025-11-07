@@ -1,11 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import { AuthProvider } from './context/AuthContext';
-import { PrivateRoute } from './components/PrivateRoute'; // You need to create this or inline the logic
-import { Registration } from './pages/Registration';
-import { Login } from './pages/Login';
-import { Home } from './pages/Home';
+import { PrivateRoute } from './components/PrivateRoute';
 import { Header } from './components/Header';
+
+import { Login } from './pages/Login';
+import { Registration } from './pages/Registration';
+import { Home } from './pages/Home';
+import Analyze from './pages/Analyze';
 
 export const App = () => {
   return (
@@ -16,7 +19,7 @@ export const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registration />} />
 
-          {/* Protected Route with Header */}
+          {/* Protected Routes */}
           <Route
             path="/"
             element={
@@ -26,11 +29,19 @@ export const App = () => {
               </PrivateRoute>
             }
           />
+          <Route
+            path="/analyze"
+            element={
+              <PrivateRoute>
+                <Header />
+                <Analyze />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </Router>
     </AuthProvider>
   );
 };
-
 
 export default App;
